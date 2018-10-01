@@ -166,6 +166,9 @@ def run(test, params, env):
         vm_bytes = (mem_total - vm_reserved) / 2
     elif vm_bytes == "shortage":
         vm_bytes = mem_total - vm_reserved + 524288
+    # calculate vm bytes based on the hugepage size supported for THP to use
+    if "madvise" in stress_args:
+        
     if "vm-bytes" in stress_args:
         params["%s_args" % stress_tool] = stress_args % vm_bytes
 
